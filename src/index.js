@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 const pizzaData = [
   {
     name: "Focaccia",
@@ -48,18 +49,50 @@ const pizzaData = [
 function App() {
   return (
     //return should only return one element
-    <div>
-      <h1>Hello, React!</h1>
-      <Pizza />
+    <div className="container">
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
+}
+
+function Header() {
+  // const style = {color:"red", fontSize: "40px"}
+  //<h1 style={style}> OR <h1 style={{color:"red", fontSize: "40px"}}>
+  return (
+    <header className="header">
+      <h1>Fast React Pizza Co.</h1>
+    </header>
+  );
+}
+
+function Menu() {
+  return (
+    <main className="menu">
+      <h2>Our menu</h2>
+      <Pizza />
+    </main>
+  );
+}
+
+function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 9;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+  //this react.createElement is the function JSX called in behind
+  //JSX is a high-level abstraction and make code east to see and understand
+  // return React.createElement("footer", null, "We're currently open!");
+  return <footer className="footer">We're currently open!</footer>;
 }
 //function should start with uppercase
 function Pizza() {
   return (
     <div>
       <img src="pizzas/spinaci.jpg" alt="spinaci pizza" />
-      <h2>Pizza Spinaci</h2>
+      <h3>Pizza Spinaci</h3>
       <p>Tomato, mozarella, spinach, and ricotta cheese</p>
     </div>
   );
