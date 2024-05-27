@@ -81,11 +81,14 @@ function Menu() {
         ingredients="Tomato and mozarella"
         photoName="pizzas/margherita.jpg"
         price={10} /> */}
-        {/* render a list, map the array and pass the props to the pizza */}
-        <ul className="pizzas">
-          {/* in general,we often pass an object */}
-          {pizzaData.map((pizza) => (<Pizza pizzaObj = {pizza}  />) )}
-        </ul>
+      {/* render a list, map the array and pass the props to the pizza */}
+      <ul className="pizzas">
+        {/* in general,we often pass an object */}
+        {/* when maping, each item needs a key  */}
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
     </main>
   );
 }
@@ -97,9 +100,13 @@ function Pizza(props) {
       <img src={props.pizzaObj.photoName} alt="spinaci pizza" />
       <h3>{props.pizzaObj.name}</h3>
       <p>{props.pizzaObj.ingredients}</p>
-      <span>{props.pizzaObj.price +3}</span>
+      <span>{props.pizzaObj.price + 3}</span>
     </li>
   );
+}
+
+function Order() {
+  return <button className="btn">Order now</button>;
 }
 
 function Footer() {
@@ -111,7 +118,18 @@ function Footer() {
   //this react.createElement is the function JSX called in behind
   //JSX is a high-level abstraction and make code east to see and understand
   // return React.createElement("footer", null, "We're currently open!");
-  return <footer className="footer">We're currently open!</footer>;
+  return (
+    <footer className="footer">
+      {isOpen && (
+        <div className="order">
+          <p>
+            We are open until {closeHour}:00. Come visit us or order online!
+          </p>
+          <Order />
+        </div>
+      )}
+    </footer>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
