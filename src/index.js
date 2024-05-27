@@ -71,8 +71,34 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
+      {/* <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={6}
+      />
+      <Pizza name="Pizza Margherita"
+        ingredients="Tomato and mozarella"
+        photoName="pizzas/margherita.jpg"
+        price={10} /> */}
+        {/* render a list, map the array and pass the props to the pizza */}
+        <ul className="pizzas">
+          {/* in general,we often pass an object */}
+          {pizzaData.map((pizza) => (<Pizza pizzaObj = {pizza}  />) )}
+        </ul>
     </main>
+  );
+}
+//function should start with uppercase
+//PROPS: allows the data pass from parents to children
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt="spinaci pizza" />
+      <h3>{props.pizzaObj.name}</h3>
+      <p>{props.pizzaObj.ingredients}</p>
+      <span>{props.pizzaObj.price +3}</span>
+    </li>
   );
 }
 
@@ -87,16 +113,7 @@ function Footer() {
   // return React.createElement("footer", null, "We're currently open!");
   return <footer className="footer">We're currently open!</footer>;
 }
-//function should start with uppercase
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="spinaci pizza" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
-  );
-}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 
