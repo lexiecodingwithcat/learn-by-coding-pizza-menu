@@ -80,14 +80,24 @@ function Menu() {
         price={6} />
       {/* render a list, map the array and pass the props to the pizza */}
       {/* only when the array has pizzas, then render */}
-      {numPizza > 0 && (
+      {/* {numPizza > 0 && (
         <ul className="pizzas">
           {/* in general,we often pass an object */}
-          {/* when maping, each item needs a key  */}
+      {/* when maping, each item needs a key  */}
+      {/* {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )} */}
+      {/* using ternaries */}
+      {numPizza > 0 ? (
+        <ul>
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>We are still working on our menu. Please come back later😊</p>
       )}
     </main>
   );
