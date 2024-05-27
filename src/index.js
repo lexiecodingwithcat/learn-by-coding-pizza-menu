@@ -68,6 +68,8 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizza = pizzas.length;
   return (
     <main className="menu">
       <h2>Our menu</h2>
@@ -75,20 +77,18 @@ function Menu() {
         name="Pizza Spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/spinaci.jpg"
-        price={6}
-      />
-      <Pizza name="Pizza Margherita"
-        ingredients="Tomato and mozarella"
-        photoName="pizzas/margherita.jpg"
-        price={10} /> */}
+        price={6} />
       {/* render a list, map the array and pass the props to the pizza */}
-      <ul className="pizzas">
-        {/* in general,we often pass an object */}
-        {/* when maping, each item needs a key  */}
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {/* only when the array has pizzas, then render */}
+      {numPizza > 0 && (
+        <ul className="pizzas">
+          {/* in general,we often pass an object */}
+          {/* when maping, each item needs a key  */}
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }
@@ -120,6 +120,7 @@ function Footer() {
   // return React.createElement("footer", null, "We're currently open!");
   return (
     <footer className="footer">
+      {/* react will not render the true or false value, but will render 0 */}
       {isOpen && (
         <div className="order">
           <p>
