@@ -92,14 +92,17 @@ function Menu() {
       {/* using ternaries */}
       {numPizza > 0 ? (
         // <React.Fragment></React.Fragment>: allows return two elements seperately without creating new HTML element
-        //no need to use <div></div> to wrap everything inside 
+        //no need to use <div></div> to wrap everything inside
         <React.Fragment>
-        <p>Authentic Italian cuisine. 6 creative dishes to choose from. All from our stone oven, all organic, all delicious. </p>
-        <ul className="pizzas">
-          {pizzaData.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.{" "}
+          </p>
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
         </React.Fragment>
       ) : (
         <p>We are still working on our menu. Please come back later😊</p>
@@ -110,13 +113,13 @@ function Menu() {
 //function should start with uppercase
 //PROPS: allows the data pass from parents to children
 //we can destruct props using {}
-function Pizza({pizzaObj}) {
+function Pizza({ pizzaObj }) {
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt="spinaci pizza" />
       <h3>{pizzaObj.name}</h3>
       <p>{pizzaObj.ingredients}</p>
-      <span>{pizzaObj.price + 3}</span>
+      <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
     </li>
   );
 }
@@ -154,12 +157,10 @@ function Footer() {
     </footer>
   );
 }
-function Order({closeHour}) {
+function Order({ closeHour }) {
   return (
     <div className="order">
-      <p>
-        We are open until {closeHour}:00. Come visit us or order online!
-      </p>
+      <p>We are open until {closeHour}:00. Come visit us or order online!</p>
       <button className="btn">Order now</button>
     </div>
   );
