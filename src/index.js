@@ -91,7 +91,7 @@ function Menu() {
       )} */}
       {/* using ternaries */}
       {numPizza > 0 ? (
-        <ul>
+        <ul className="pizzas">
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
@@ -121,24 +121,39 @@ function Order() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 9;
+  const openHour = 10;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
   //this react.createElement is the function JSX called in behind
   //JSX is a high-level abstraction and make code east to see and understand
   // return React.createElement("footer", null, "We're currently open!");
+  if (!isOpen) {
+    return (
+      <p>
+        We are happy to welcome you between {openHour}:00 and {closeHour}:00
+      </p>
+    );
+  }
   return (
     <footer className="footer">
       {/* react will not render the true or false value, but will render 0 */}
-      {isOpen && (
+      <div className="order">
+        <p>We are open until {closeHour}:00. Come visit us or order online!</p>
+        <Order />
+      </div>
+      {/* {isOpen ? (
         <div className="order">
           <p>
             We are open until {closeHour}:00. Come visit us or order online!
           </p>
           <Order />
         </div>
-      )}
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closeHour}:00
+        </p>
+      )} */}
     </footer>
   );
 }
