@@ -104,19 +104,16 @@ function Menu() {
 }
 //function should start with uppercase
 //PROPS: allows the data pass from parents to children
-function Pizza(props) {
+//we can destruct props using {}
+function Pizza({pizzaObj}) {
   return (
     <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt="spinaci pizza" />
-      <h3>{props.pizzaObj.name}</h3>
-      <p>{props.pizzaObj.ingredients}</p>
-      <span>{props.pizzaObj.price + 3}</span>
+      <img src={pizzaObj.photoName} alt="spinaci pizza" />
+      <h3>{pizzaObj.name}</h3>
+      <p>{pizzaObj.ingredients}</p>
+      <span>{pizzaObj.price + 3}</span>
     </li>
   );
-}
-
-function Order() {
-  return <button className="btn">Order now</button>;
 }
 
 function Footer() {
@@ -128,33 +125,38 @@ function Footer() {
   //this react.createElement is the function JSX called in behind
   //JSX is a high-level abstraction and make code east to see and understand
   // return React.createElement("footer", null, "We're currently open!");
-  if (!isOpen) {
-    return (
-      <p>
-        We are happy to welcome you between {openHour}:00 and {closeHour}:00
-      </p>
-    );
-  }
+  // if (!isOpen) {
+  //   return (
+  //     <p>
+  //       We are happy to welcome you between {openHour}:00 and {closeHour}:00
+  //     </p>
+  //   );
+  // }
   return (
     <footer className="footer">
       {/* react will not render the true or false value, but will render 0 */}
-      <div className="order">
+      {/* <div className="order">
         <p>We are open until {closeHour}:00. Come visit us or order online!</p>
-        <Order />
-      </div>
-      {/* {isOpen ? (
-        <div className="order">
-          <p>
-            We are open until {closeHour}:00. Come visit us or order online!
-          </p>
-          <Order />
-        </div>
+        
+      </div> */}
+      {isOpen ? (
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           We are happy to welcome you between {openHour}:00 and {closeHour}:00
         </p>
-      )} */}
+      )}
     </footer>
+  );
+}
+function Order({closeHour}) {
+  return (
+    <div className="order">
+      <p>
+        We are open until {closeHour}:00. Come visit us or order online!
+      </p>
+      <button className="btn">Order now</button>
+    </div>
   );
 }
 
