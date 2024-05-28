@@ -91,11 +91,16 @@ function Menu() {
       )} */}
       {/* using ternaries */}
       {numPizza > 0 ? (
+        // <React.Fragment></React.Fragment>: allows return two elements seperately without creating new HTML element
+        //no need to use <div></div> to wrap everything inside 
+        <React.Fragment>
+        <p>Authentic Italian cuisine. 6 creative dishes to choose from. All from our stone oven, all organic, all delicious. </p>
         <ul className="pizzas">
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+        </React.Fragment>
       ) : (
         <p>We are still working on our menu. Please come back later😊</p>
       )}
